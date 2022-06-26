@@ -12,9 +12,9 @@ from sklearn.linear_model import LinearRegression
 class LinReg:
     def __init__(self):
         self.modelRedWine = joblib.load(
-            "../../research/RedWineLinearRegression.joblib")
+            "D:/Python Files/New Projects/ML Web/Ml_Web\/backend/server/apps/ml/research/RedWineLinearRegression.joblib")
         self.modelWhiteWine = joblib.load(
-            "../../research/WhiteWineLinearRegression.joblib")
+            "D:/Python Files/New Projects/ML Web/Ml_Web\/backend/server/apps/ml/research/WhiteWineLinearRegression.joblib")
 
     def getDataFrame(self, inputData):
         inputData = pd.DataFrame(inputData, index=[0])
@@ -27,21 +27,22 @@ class LinReg:
         return self.modelWhiteWine.predict(inputData)
 
     def postprocessing(self, inputData):
-        return {"Quality": inputData[1], "status": "OK"}
+        return {"Quality": inputData, "status": "OK"}
 
     def compute_prediction_red(self, inputData):
         try:
             inputData = self.getDataFrame(inputData)
-            prediction = self.predict_red(inputData)[0]
+            prediction = self.predict_red(inputData).tolist()[0]
             prediction = self.postprocessing(prediction)
         except Exception as e:
+            print(self.predict_red(inputData).tolist()[0])
             return {"status": "Error", "message": str(e)}
         return prediction
 
     def compute_prediction_white(self, inputData):
         try:
             inputData = self.getDataFrame(inputData)
-            prediction = self.predict_white(inputData)[0]
+            prediction = self.predict_white(inputData).tolist()[0]
             prediction = self.postprocessing(prediction)
         except Exception as e:
             return {"status": "Error", "message": str(e)}
