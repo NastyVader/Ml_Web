@@ -27,11 +27,20 @@ try:
 
     registry.add_algorithm(endpoint_name="RedWine Quality",
                            algorithm_object=lr,
-                           algorithm_name="random forest",
+                           algorithm_name="Linear Regression",
                            algorithm_status="production",
                            algorithm_version="0.0.1",
                            owner="Karhik Ronad",
-                           algorithm_description="Linear Regression with simple pre- and post-processing",
+                           algorithm_description="Linear Regression for Red Wine",
+                           algorithm_code=inspect.getsource(LinReg))
+
+    registry.add_algorithm(endpoint_name="WhiteWine Quality",
+                           algorithm_object=lr,
+                           algorithm_name="Linear Regression",
+                           algorithm_status="production",
+                           algorithm_version="0.0.1",
+                           owner="Karhik Ronad",
+                           algorithm_description="Linear Regression for White Wine",
                            algorithm_code=inspect.getsource(LinReg))
 
 except Exception as e:
